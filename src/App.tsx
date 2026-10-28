@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ArrowDownRight, ArrowRight, Github, Linkedin, Mail, Menu, X, Sparkles, ExternalLink } from 'lucide-react';
+import { ArrowDownRight, ArrowRight, GithubIcon as Github, Linkedin, Mail, Menu, X, Sparkles, ExternalLink } from 'lucide-react';
 
 const projects = [
   { no: '01', tag: 'DESKTOP TOOL · IN DEVELOPMENT', title: 'Writto', type: 'PROJECT / 001', art: 'writto', description: 'A desktop tool exploring a simpler way to work through assignment PDFs, with text-to-speech and guided reading controls.', tech: 'Python · Text-to-speech · Desktop UX', status: 'IN PROGRESS' },
