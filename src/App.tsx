@@ -1,45 +1,540 @@
 import { useEffect, useState } from 'react';
-import { ArrowDownRight, ArrowRight, GithubIcon as Github, Linkedin, Mail, Menu, X, Sparkles, ExternalLink } from 'lucide-react';
+import {
+  ArrowDownRight,
+  ArrowRight,
+  Linkedin,
+  Mail,
+  Menu,
+  X,
+  Sparkles,
+  ExternalLink,
+} from 'lucide-react';
 
 const projects = [
-  { no: '01', tag: 'DESKTOP TOOL · IN DEVELOPMENT', title: 'Writto', type: 'PROJECT / 001', art: 'writto', description: 'A desktop tool exploring a simpler way to work through assignment PDFs, with text-to-speech and guided reading controls.', tech: 'Python · Text-to-speech · Desktop UX', status: 'IN PROGRESS' },
-  { no: '02', tag: 'ENGINEERING EXPERIENCE', title: 'Railway Signalling', type: 'EXPERIENCE / 001', art: 'rail', description: 'Hands-on experience with railway signalling systems, interlocking, PLC logic, electrical circuit layouts, technical documentation, and testing support.', tech: 'Signalling · PLC · AutoCAD · Logic verification', status: 'FOUNDATION' },
-  { no: '03', tag: 'PRACTICE & EXPLORATION', title: 'Python Projects', type: 'PROJECT / 002', art: 'python', description: 'A growing collection of small scripts, utilities, and experiments built while learning programming, data handling, and automation.', tech: 'Python · Data · Automation', status: 'LEARNING' },
-  { no: '04', tag: 'FUTURE EXPLORATIONS', title: 'AI / ML Projects', type: 'PROJECT / 003', art: 'ai', description: 'Building a foundation in data science and exploring future projects in machine learning, natural-language applications, and practical AI workflows.', tech: 'AI · Machine Learning · Data Science', status: 'EXPLORING' },
+  {
+    no: '01',
+    tag: 'DESKTOP TOOL · IN DEVELOPMENT',
+    title: 'Writto',
+    type: 'PROJECT / 001',
+    art: 'writto',
+    description:
+      'A desktop tool exploring a simpler way to work through assignment PDFs, with text-to-speech and guided reading controls.',
+    tech: 'Python · Text-to-speech · Desktop UX',
+    status: 'IN PROGRESS',
+  },
+  {
+    no: '02',
+    tag: 'ENGINEERING EXPERIENCE',
+    title: 'Railway Signalling',
+    type: 'EXPERIENCE / 001',
+    art: 'rail',
+    description:
+      'Hands-on experience with railway signalling systems, interlocking, PLC logic, electrical circuit layouts, technical documentation, and testing support.',
+    tech: 'Signalling · PLC · AutoCAD · Logic verification',
+    status: 'FOUNDATION',
+  },
+  {
+    no: '03',
+    tag: 'PRACTICE & EXPLORATION',
+    title: 'Python Projects',
+    type: 'PROJECT / 002',
+    art: 'python',
+    description:
+      'A growing collection of small scripts, utilities, and experiments built while learning programming, data handling, and automation.',
+    tech: 'Python · Data · Automation',
+    status: 'LEARNING',
+  },
+  {
+    no: '04',
+    tag: 'FUTURE EXPLORATIONS',
+    title: 'AI / ML Projects',
+    type: 'PROJECT / 003',
+    art: 'ai',
+    description:
+      'Building a foundation in data science and exploring future projects in machine learning, natural-language applications, and practical AI workflows.',
+    tech: 'AI · Machine Learning · Data Science',
+    status: 'EXPLORING',
+  },
 ];
+
 const skills = [
   ['01', 'Python', 'Programming fundamentals and practical automation'],
-  ['02', 'Natural Language Application Design', 'Designing useful tools around text, language, and user workflows'],
-  ['03', 'PLC Logic & Electronics Basics', 'Control logic, basic circuits, and understanding system behaviour'],
-  ['04', 'Railway Signalling & Logic Verification', 'Signalling fundamentals and involvement in checking system logic'],
-  ['05', 'Data Analysis', 'Learning to clean, explore, and understand data'],
+  [
+    '02',
+    'Natural Language Application Design',
+    'Designing useful tools around text, language, and user workflows',
+  ],
+  [
+    '03',
+    'PLC Logic & Electronics Basics',
+    'Control logic, basic circuits, and understanding system behaviour',
+  ],
+  [
+    '04',
+    'Railway Signalling & Logic Verification',
+    'Signalling fundamentals and involvement in checking system logic',
+  ],
+  [
+    '05',
+    'Data Analysis',
+    'Learning to clean, explore, and understand data',
+  ],
 ];
+
 function Artwork({ kind }: { kind: string }) {
-  if (kind === 'writto') return <div className="art art-writto"><div className="paper"><span className="dots">•••</span><strong>writto.</strong><i /><i /><div className="play">▶ &nbsp; READ ALOUD</div><small>A TOOL FOR FOCUS</small></div></div>;
-  if (kind === 'rail') return <div className="art art-rail"><div className="rail-line"><span>FOCUS</span><b>✓</b><span>SYSTEMS</span><b>✓</b><span>SAFETY</span></div><small>ENGINEERING EXPERIENCE</small></div>;
-  if (kind === 'python') return <div className="art art-python"><span className="brace">{'{ }'}</span><div className="bars"><i/><i/><i/><i/><i/><i/></div><small>DATA IN PROGRESS</small></div>;
-  return <div className="art art-ai"><div className="orbit orbit-a"/><div className="orbit orbit-b"/><div className="ai-core">AI<br/><span>+</span></div><small>IDEA → EXPERIMENT</small></div>;
+  if (kind === 'writto') {
+    return (
+      <div className="art art-writto">
+        <div className="paper">
+          <span className="dots">•••</span>
+          <strong>writto.</strong>
+          <i />
+          <i />
+          <div className="play">▶ &nbsp; READ ALOUD</div>
+          <small>A TOOL FOR FOCUS</small>
+        </div>
+      </div>
+    );
+  }
+
+  if (kind === 'rail') {
+    return (
+      <div className="art art-rail">
+        <div className="rail-line">
+          <span>FOCUS</span>
+          <b>✓</b>
+          <span>SYSTEMS</span>
+          <b>✓</b>
+          <span>SAFETY</span>
+        </div>
+        <small>ENGINEERING EXPERIENCE</small>
+      </div>
+    );
+  }
+
+  if (kind === 'python') {
+    return (
+      <div className="art art-python">
+        <span className="brace">{'{ }'}</span>
+        <div className="bars">
+          <i />
+          <i />
+          <i />
+          <i />
+          <i />
+          <i />
+        </div>
+        <small>DATA IN PROGRESS</small>
+      </div>
+    );
+  }
+
+  return (
+    <div className="art art-ai">
+      <div className="orbit orbit-a" />
+      <div className="orbit orbit-b" />
+      <div className="ai-core">
+        AI
+        <br />
+        <span>+</span>
+      </div>
+      <small>IDEA → EXPERIMENT</small>
+    </div>
+  );
 }
+
 export function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeProject, setActiveProject] = useState<string | null>(null);
+
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }), { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => {
+      observer.observe(el);
+    });
+
     return () => observer.disconnect();
   }, []);
+
   const closeMenu = () => setMenuOpen(false);
-  return <div className="site-shell">
-    <header className="nav-wrap"><nav className="nav container"><a href="#home" className="brand" onClick={closeMenu}><span className="brand-mark">MB</span><span>MURUGESAN.</span></a><button className="mobile-menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X/> : <Menu/>}</button><div className={`nav-links ${menuOpen ? 'nav-open' : ''}`}><a href="#about" onClick={closeMenu}>About</a><a href="#work" onClick={closeMenu}>Selected work</a><a href="#skills" onClick={closeMenu}>Skills</a><a href="#contact" onClick={closeMenu}>Contact</a></div><a className="connect-link" href="#contact">Let's connect <ArrowDownRight size={14}/></a></nav></header>
-    <main>
-      <section className="hero container" id="home">
-        <div className="hero-copy reveal"><div className="eyebrow"><span className="status-dot"/> BUILDING, LEARNING, ITERATING / 001</div><h1>From Prompt<br/>to Product:<br/><em>The Next-Gen<br/>Software Creator.</em></h1><p className="role-line">AI &amp; Data Science Student <span>/</span> Automation Enthusiast</p><p className="intro">I explore the space between engineering and software — turning everyday friction into practical tools, one experiment at a time.</p><div className="hero-actions"><a className="button-primary" href="#work">Explore my work <ArrowRight size={15}/></a><a className="text-link" href="#about">A little about me <ArrowDownRight size={14}/></a></div><div className="currently"><span>CURRENTLY</span><p>Studying AI &amp; Data Science · Building small, useful things</p></div></div>
-        <div className="hero-visual reveal"><div className="portrait-frame"><div className="frame-top"><span>PERSONAL ARCHIVE</span><span>IND / 2026</span></div><div className="portrait-image-wrap"><img src="/images/murugesan-portrait.png" alt="Portrait of Murugesan Balasubramanian"/><div className="portrait-stamp"><strong>MB</strong><span>IDEAS<br/>IN MOTION</span></div></div><div className="portrait-caption"><strong>Murugesan<br/>Balasubramanian</strong><span>AI · DATA ·<br/>AUTOMATION</span></div></div><div className="learning-tag"><Sparkles size={16}/><span>Learning in public.<br/>Building with intent.</span></div><span className="hero-index">01 — 04</span></div>
-      </section>
-      <section className="about section-light" id="about"><div className="container"><div className="section-meta"><span>01 / ABOUT</span><span>THE PERSON BEHIND THE PROJECTS</span></div><div className="about-grid"><h2 className="reveal">Engineering taught me to<br/>think in systems.<br/><em>Software lets me rethink<br/>them.</em></h2><div className="about-copy reveal"><p>Hi, I'm Murugesan, an AI and Data Science student with a background in railway signalling and a strong interest in automation.</p><p>I enjoy exploring how technology can simplify manual work through Python, data analysis, natural-language application design, and engineering automation. I'm currently working on projects like Writto and continuously developing my technical skills.</p><p>My long-term goal is to build practical solutions that solve real-world problems and eventually establish my own R&amp;D solutions startup, ElvOra.</p><p>I'm always curious to learn, experiment, and turn ideas into useful applications.</p><div className="signature"><span>MB</span><small>STAY CURIOUS. MAKE IT USEFUL.</small></div></div></div></div></section>
-      <section className="work section-dark" id="work"><div className="container"><div className="section-meta"><span>02 / SELECTED WORK</span><span>EXPERIMENTS, TOOLS &amp; NEXT STEPS</span></div><div className="section-heading"><h2>Things I'm making<br/><em>and figuring out.</em></h2><p>A growing collection — from railway signalling foundations to AI explorations taking shape.</p></div><div className="project-grid">{projects.map(p=><article className="project-card reveal" key={p.no} onClick={() => setActiveProject(activeProject === p.no ? null : p.no)}><div className="project-card-meta"><span>{p.type}</span><span className="status-pill">{p.status}</span></div><Artwork kind={p.art}/><div className="project-content"><span className="project-tag">{p.tag}</span><h3>{p.title}</h3><p>{p.description}</p>{activeProject === p.no && <div className="project-extra"><strong>WHAT I'M EXPLORING</strong><p>{p.tech}</p><span>This entry reflects my current experience and learning stage.</span></div>}<div className="project-footer"><span>{p.tech}</span><button aria-label={`More about ${p.title}`}><ArrowDownRight size={16}/></button></div></div></article>)}</div><p className="more-note">A MORE IN PROGRESS — MORE TO COME.</p></div></section>
-      <section className="skills section-light" id="skills"><div className="container"><div className="section-meta"><span>03 / TOOLKIT</span><span>WHAT I'M LEARNING &amp; BRINGING</span></div><div className="skills-grid"><h2 className="reveal">A mixed toolkit.<br/><em>One curious mind.</em></h2><div className="skill-list">{skills.map(s=><div className="skill-row reveal" key={s[0]}><span className="skill-no">{s[0]}</span><div><h3>{s[1]}</h3><p>{s[2]}</p></div><ArrowDownRight size={14}/></div>)}</div></div><div className="elvora-card reveal"><div className="elvora-top"><span>A FUTURE IDEA / 005</span><Sparkles size={18}/></div><small>SOMETHING IS COOKING...</small><h3>ElvOra.</h3><div className="elvora-bottom"><p>A future R&amp;D solutions startup in the making.<br/>Still taking shape — more when the time is right.</p><span>IN THE WORKS <i/></span></div></div></div></section>
-      <section className="contact section-light" id="contact"><div className="container"><div className="section-meta"><span>04 / CONTACT</span><span>GOOD THINGS START WITH A CONVERSATION</span></div><div className="contact-grid"><h2>Have an idea?<br/><em>Let's talk.</em></h2><div className="contact-copy"><p>I'm always happy to connect with people who enjoy learning, building, and solving practical problems.</p><div className="contact-links"><a href="https://www.linkedin.com/in/murugesan-b-8707b8340" target="_blank" rel="noreferrer">LinkedIn <ExternalLink size={14}/></a><a href="https://github.com/ElvOra-murugesan" target="_blank" rel="noreferrer">GitHub <Github size={14}/></a><a href="mailto:hello@example.com">Email me <Mail size={14}/></a></div><small className="email-note">Replace hello@example.com with your preferred public email before publishing.</small></div></div></div></section>
-    </main><footer className="footer"><div className="container footer-inner"><a href="#home" className="brand"><span className="brand-mark">MB</span><span>MURUGESAN.</span></a><span>DESIGNED TO KEEP EVOLVING</span><span>© 2026 · MADE WITH CURIOSITY</span></div></footer>
-  </div>;
+
+  return (
+    <div className="site-shell">
+      <header className="nav-wrap">
+        <nav className="nav container">
+          <a href="#home" className="brand" onClick={closeMenu}>
+            <span className="brand-mark">MB</span>
+            <span>MURUGESAN.</span>
+          </a>
+
+          <button
+            className="mobile-menu"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X /> : <Menu />}
+          </button>
+
+          <div className={`nav-links ${menuOpen ? 'nav-open' : ''}`}>
+            <a href="#about" onClick={closeMenu}>About</a>
+            <a href="#work" onClick={closeMenu}>Selected work</a>
+            <a href="#skills" onClick={closeMenu}>Skills</a>
+            <a href="#contact" onClick={closeMenu}>Contact</a>
+          </div>
+
+          <a className="connect-link" href="#contact">
+            Let's connect <ArrowDownRight size={14} />
+          </a>
+        </nav>
+      </header>
+
+      <main>
+        <section className="hero container" id="home">
+          <div className="hero-copy reveal">
+            <div className="eyebrow">
+              <span className="status-dot" />
+              BUILDING, LEARNING, ITERATING / 001
+            </div>
+
+            <h1>
+              From Prompt
+              <br />
+              to Product:
+              <br />
+              <em>
+                The Next-Gen
+                <br />
+                Software Creator.
+              </em>
+            </h1>
+
+            <p className="role-line">
+              AI &amp; Data Science Student <span>/</span> Automation Enthusiast
+            </p>
+
+            <p className="intro">
+              I explore the space between engineering and software — turning
+              everyday friction into practical tools, one experiment at a time.
+            </p>
+
+            <div className="hero-actions">
+              <a className="button-primary" href="#work">
+                Explore my work <ArrowRight size={15} />
+              </a>
+              <a className="text-link" href="#about">
+                A little about me <ArrowDownRight size={14} />
+              </a>
+            </div>
+
+            <div className="currently">
+              <span>CURRENTLY</span>
+              <p>
+                Studying AI &amp; Data Science · Building small, useful things
+              </p>
+            </div>
+          </div>
+
+          <div className="hero-visual reveal">
+            <div className="portrait-frame">
+              <div className="frame-top">
+                <span>PERSONAL ARCHIVE</span>
+                <span>IND / 2026</span>
+              </div>
+
+              <div className="portrait-image-wrap">
+                <img
+                  src="/images/murugesan-portrait.png"
+                  alt="Portrait of Murugesan Balasubramanian"
+                />
+                <div className="portrait-stamp">
+                  <strong>MB</strong>
+                  <span>
+                    IDEAS
+                    <br />
+                    IN MOTION
+                  </span>
+                </div>
+              </div>
+
+              <div className="portrait-caption">
+                <strong>
+                  Murugesan
+                  <br />
+                  Balasubramanian
+                </strong>
+                <span>
+                  AI · DATA ·
+                  <br />
+                  AUTOMATION
+                </span>
+              </div>
+            </div>
+
+            <div className="learning-tag">
+              <Sparkles size={16} />
+              <span>
+                Learning in public.
+                <br />
+                Building with intent.
+              </span>
+            </div>
+
+            <span className="hero-index">01 — 04</span>
+          </div>
+        </section>
+
+        <section className="about section-light" id="about">
+          <div className="container">
+            <div className="section-meta">
+              <span>01 / ABOUT</span>
+              <span>THE PERSON BEHIND THE PROJECTS</span>
+            </div>
+
+            <div className="about-grid">
+              <h2 className="reveal">
+                Engineering taught me to
+                <br />
+                think in systems.
+                <br />
+                <em>
+                  Software lets me rethink
+                  <br />
+                  them.
+                </em>
+              </h2>
+
+              <div className="about-copy reveal">
+                <p>
+                  Hi, I'm Murugesan, an AI and Data Science student with a
+                  background in railway signalling and a strong interest in
+                  automation.
+                </p>
+
+                <p>
+                  I enjoy exploring how technology can simplify manual work
+                  through Python, data analysis, natural-language application
+                  design, and engineering automation. I'm currently working on
+                  projects like Writto and continuously developing my technical
+                  skills.
+                </p>
+
+                <p>
+                  My long-term goal is to build practical solutions that solve
+                  real-world problems and eventually establish my own R&amp;D
+                  solutions startup, ElvOra.
+                </p>
+
+                <p>
+                  I'm always curious to learn, experiment, and turn ideas into
+                  useful applications.
+                </p>
+
+                <div className="signature">
+                  <span>MB</span>
+                  <small>STAY CURIOUS. MAKE IT USEFUL.</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="work section-dark" id="work">
+          <div className="container">
+            <div className="section-meta">
+              <span>02 / SELECTED WORK</span>
+              <span>EXPERIMENTS, TOOLS &amp; NEXT STEPS</span>
+            </div>
+
+            <div className="section-heading">
+              <h2>
+                Things I'm making
+                <br />
+                <em>and figuring out.</em>
+              </h2>
+              <p>
+                A growing collection — from railway signalling foundations to
+                AI explorations taking shape.
+              </p>
+            </div>
+
+            <div className="project-grid">
+              {projects.map((p) => (
+                <article
+                  className="project-card reveal"
+                  key={p.no}
+                  onClick={() =>
+                    setActiveProject(activeProject === p.no ? null : p.no)
+                  }
+                >
+                  <div className="project-card-meta">
+                    <span>{p.type}</span>
+                    <span className="status-pill">{p.status}</span>
+                  </div>
+
+                  <Artwork kind={p.art} />
+
+                  <div className="project-content">
+                    <span className="project-tag">{p.tag}</span>
+                    <h3>{p.title}</h3>
+                    <p>{p.description}</p>
+
+                    {activeProject === p.no && (
+                      <div className="project-extra">
+                        <strong>WHAT I'M EXPLORING</strong>
+                        <p>{p.tech}</p>
+                        <span>
+                          This entry reflects my current experience and
+                          learning stage.
+                        </span>
+                      </div>
+                    )}
+
+                    <div className="project-footer">
+                      <span>{p.tech}</span>
+                      <button
+                        aria-label={`More about ${p.title}`}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          setActiveProject(
+                            activeProject === p.no ? null : p.no
+                          );
+                        }}
+                      >
+                        <ArrowDownRight size={16} />
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <p className="more-note">
+              A MORE IN PROGRESS — MORE TO COME.
+            </p>
+          </div>
+        </section>
+
+        <section className="skills section-light" id="skills">
+          <div className="container">
+            <div className="section-meta">
+              <span>03 / TOOLKIT</span>
+              <span>WHAT I'M LEARNING &amp; BRINGING</span>
+            </div>
+
+            <div className="skills-grid">
+              <h2 className="reveal">
+                A mixed toolkit.
+                <br />
+                <em>One curious mind.</em>
+              </h2>
+
+              <div className="skill-list">
+                {skills.map((s) => (
+                  <div className="skill-row reveal" key={s[0]}>
+                    <span className="skill-no">{s[0]}</span>
+                    <div>
+                      <h3>{s[1]}</h3>
+                      <p>{s[2]}</p>
+                    </div>
+                    <ArrowDownRight size={14} />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="elvora-card reveal">
+              <div className="elvora-top">
+                <span>A FUTURE IDEA / 005</span>
+                <Sparkles size={18} />
+              </div>
+              <small>SOMETHING IS COOKING...</small>
+              <h3>ElvOra.</h3>
+              <div className="elvora-bottom">
+                <p>
+                  A future R&amp;D solutions startup in the making.
+                  <br />
+                  Still taking shape — more when the time is right.
+                </p>
+                <span>
+                  IN THE WORKS <i />
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="contact section-light" id="contact">
+          <div className="container">
+            <div className="section-meta">
+              <span>04 / CONTACT</span>
+              <span>GOOD THINGS START WITH A CONVERSATION</span>
+            </div>
+
+            <div className="contact-grid">
+              <h2>
+                Have an idea?
+                <br />
+                <em>Let's talk.</em>
+              </h2>
+
+              <div className="contact-copy">
+                <p>
+                  I'm always happy to connect with people who enjoy learning,
+                  building, and solving practical problems.
+                </p>
+
+                <div className="contact-links">
+                  <a
+                    href="https://www.linkedin.com/in/murugesan-b-8707b8340"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    LinkedIn <ExternalLink size={14} />
+                  </a>
+
+                  <a
+                    href="https://github.com/ElvOra-murugesan"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    GitHub <ExternalLink size={14} />
+                  </a>
+
+                  <a href="mailto:muruges8526@gmail.com">
+                    Email me <Mail size={14} />
+                  </a>
+                </div>
+
+                <small className="email-note">
+                  Replace muruges8526@gmail.com with your preferred public email
+                  before publishing.
+                </small>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="footer">
+        <div className="container footer-inner">
+          <a href="#home" className="brand">
+            <span className="brand-mark">MB</span>
+            <span>MURUGESAN.</span>
+          </a>
+          <span>DESIGNED TO KEEP EVOLVING</span>
+          <span>© 2026 · MADE WITH CURIOSITY</span>
+        </div>
+      </footer>
+    </div>
+  );
 }
