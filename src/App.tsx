@@ -143,7 +143,7 @@ function Artwork({ kind }: { kind: string }) {
   );
 }
 
-export function App() {
+export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeProject, setActiveProject] = useState<string | null>(null);
 
