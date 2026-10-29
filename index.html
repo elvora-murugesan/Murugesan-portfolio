@@ -82,7 +82,7 @@
     .cursor-glow, .cursor-dot { display: none !important; }
   }
 
-  /* TELEMETRY LOGIC CANVAS (LEFT BOUND) */
+  /* TELEMETRY LOGIC CANVAS (BACKGROUND PARTICLES) */
   #circuitCanvas {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -243,7 +243,9 @@
     box-shadow: 0 0 20px rgba(229, 35, 42, 0.4);
   }
 
-  /* HERO VIEWPORT */
+  /* ========================================================
+     HERO VIEWPORT & CROPPED RIGHT-SIDE PHOTO
+     ======================================================== */
   .hero-viewport {
     position: relative;
     width: 100%;
@@ -259,34 +261,104 @@
     position: absolute;
     inset: 0;
     background: 
-      radial-gradient(circle at 82% 48%, rgba(229, 35, 42, 0.25) 0%, rgba(229, 35, 42, 0.08) 40%, transparent 70%),
+      radial-gradient(circle at 76% 50%, rgba(229, 35, 42, 0.26) 0%, rgba(229, 35, 42, 0.08) 45%, transparent 72%),
       radial-gradient(circle at 20% 50%, rgba(0, 242, 254, 0.08) 0%, transparent 50%);
     pointer-events: none;
     z-index: 1;
   }
 
+  /* PHOTO CONTAINER WITH RIGHT-SIDE CROPPING */
   .hero-bg-media {
     position: absolute;
-    top: 0; right: 0; width: 55%; height: 100%;
+    top: 0; 
+    right: 0; 
+    width: 100%; 
+    height: 100%;
     z-index: 1;
+    overflow: hidden; /* Clips right edge cleanly */
   }
 
   .hero-bg-media img {
-    width: 100%; height: 100%;
+    width: 100%; 
+    height: 100%;
     object-fit: cover;
-    object-position: center 20%;
+    object-position: 84% center; /* Anchors towards subject */
     display: block;
     filter: contrast(1.05) brightness(0.96);
+    /* Zooms slightly and shifts to crop the right-hand excess background */
+    transform: scale(1.08) translateX(2.6%);
+    transform-origin: 84% center;
   }
 
+  /* Scrim overlay across image */
   .hero-bg-scrim {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, #060807 0%, rgba(6, 8, 7, 0.4) 40%, transparent 100%),
-                linear-gradient(180deg, transparent 75%, #060807 100%);
+    background: 
+      linear-gradient(90deg, #060807 0%, rgba(6, 8, 7, 0.75) 30%, rgba(6, 8, 7, 0.2) 55%, transparent 75%),
+      linear-gradient(180deg, transparent 75%, #060807 100%);
     pointer-events: none;
   }
 
+  /* ========================================================
+     AUTOMATIC BACKGROUND MOTION (BEHIND THE PERSON ONLY)
+     ======================================================== */
+  .hero-bg-aura-motion {
+    position: absolute;
+    top: 48%;
+    right: 22%;
+    transform: translate(50%, -50%);
+    width: min(620px, 60vw);
+    height: min(620px, 60vw);
+    pointer-events: none;
+    z-index: 2; /* Behind the text and blended into photo background */
+    mix-blend-mode: screen; /* Illuminates only the dark background & aura */
+  }
+
+  /* Pulsing Ambient Halo */
+  .bg-aura-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(229, 35, 42, 0.55);
+    box-shadow: 0 0 45px rgba(229, 35, 42, 0.35), inset 0 0 35px rgba(229, 35, 42, 0.2);
+    animation: auraBreath 4.5s ease-in-out infinite alternate;
+  }
+
+  /* Rotating Dashed Telemetry Ring */
+  .bg-aura-dashed {
+    position: absolute;
+    inset: -24px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(0, 242, 254, 0.3);
+    animation: rotateClockwise 26s linear infinite;
+  }
+
+  /* Outer Radial Glow Wave */
+  .bg-aura-wave {
+    position: absolute;
+    inset: -60px;
+    border-radius: 50%;
+    border: 1px solid rgba(229, 35, 42, 0.18);
+    animation: rotateCounter 34s linear infinite;
+  }
+
+  @keyframes auraBreath {
+    0% { transform: scale(0.94); opacity: 0.5; filter: blur(0px); }
+    100% { transform: scale(1.05); opacity: 0.9; filter: blur(1.5px); }
+  }
+
+  @keyframes rotateClockwise {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes rotateCounter {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  /* HERO CONTAINER & TEXT (FRONT ELEMENTS — STATIC & CRISP) */
   .hero-container {
     position: relative;
     z-index: 5;
@@ -1014,9 +1086,7 @@
   .form-status-msg.sending { display: flex; color: var(--cyan-cyber); }
   .form-status-msg.error { display: flex; color: #f87171; }
 
-  /* ========================================================
-     CYBER SUCCESS ANIMATION STATE (POST-SUBMIT)
-     ======================================================== */
+  /* POST-SUBMIT CYBER ANIMATION */
   .success-animation-wrap {
     display: none;
     flex-direction: column;
@@ -1044,7 +1114,6 @@
     margin-bottom: 24px;
   }
 
-  /* Animated Expanding Cyber Ring */
   .success-pulse-ring {
     position: absolute;
     inset: -14px;
@@ -1060,7 +1129,6 @@
     100% { transform: scale(0.85); opacity: 0.9; }
   }
 
-  /* Hologram Checkmark SVG Drawing */
   .success-svg {
     width: 82px;
     height: 82px;
@@ -1070,7 +1138,7 @@
     stroke: var(--cyan-cyber);
     stroke-miterlimit: 10;
     box-shadow: inset 0px 0px 0px var(--cyan-cyber);
-    animation: fillCircle 0.4s ease-in-out 0.4s forwards, scaleBounce 0.3s ease-in-out 0.8s both;
+    animation: scaleBounce 0.3s ease-in-out 0.8s both;
   }
 
   .success-circle {
@@ -1093,14 +1161,8 @@
     animation: strokeCheck 0.35s cubic-bezier(0.65, 0, 0.45, 1) 0.55s forwards;
   }
 
-  @keyframes strokeCircle {
-    100% { stroke-dashoffset: 0; }
-  }
-
-  @keyframes strokeCheck {
-    100% { stroke-dashoffset: 0; }
-  }
-
+  @keyframes strokeCircle { 100% { stroke-dashoffset: 0; } }
+  @keyframes strokeCheck { 100% { stroke-dashoffset: 0; } }
   @keyframes scaleBounce {
     0%, 100% { transform: none; }
     50% { transform: scale3d(1.1, 1.1, 1); }
@@ -1152,7 +1214,6 @@
     transform: translateY(-2px);
   }
 
-  /* Digital Cyber Particles */
   .cyber-spark {
     position: absolute;
     width: 6px;
@@ -1313,12 +1374,25 @@
     .hero-bg-media {
       position: relative;
       width: 100%;
-      height: clamp(300px, 46vh, 420px);
+      height: clamp(320px, 48vh, 440px);
       margin: 0 auto;
     }
 
+    .hero-bg-media img {
+      object-position: 80% center;
+      transform: scale(1.05) translateX(1.5%);
+    }
+
+    .hero-bg-aura-motion {
+      top: 24%;
+      right: 50%;
+      transform: translate(50%, -50%);
+      width: 320px;
+      height: 320px;
+    }
+
     .hero-bg-scrim {
-      background: linear-gradient(180deg, transparent 50%, #060807 100%);
+      background: linear-gradient(180deg, transparent 40%, #060807 100%);
     }
 
     .hero-container {
@@ -1393,6 +1467,7 @@
 <section class="hero-viewport" id="heroArea">
   <canvas id="circuitCanvas"></canvas>
 
+  <!-- BACKGROUND IMAGE WITH RIGHT-SIDE CROP -->
   <div class="hero-bg-media" id="heroMedia">
     <img id="mainPortrait" 
          src="portrait.jpg" 
@@ -1401,6 +1476,14 @@
     <div class="hero-bg-scrim"></div>
   </div>
 
+  <!-- AUTOMATIC BACKGROUND MOTION (BEHIND THE PERSON ONLY) -->
+  <div class="hero-bg-aura-motion">
+    <div class="bg-aura-ring"></div>
+    <div class="bg-aura-dashed"></div>
+    <div class="bg-aura-wave"></div>
+  </div>
+
+  <!-- FOREGROUND TEXT (STATIC & CRISP) -->
   <div class="hero-container" id="heroContent">
     <div class="hero-text-block">
       <div class="eyebrow">
@@ -1780,7 +1863,6 @@
         <div class="border-beam"></div>
         <div class="card-inner contact-form-inner" id="formWrapperCard">
           
-          <!-- FORM HEADER -->
           <div class="form-header" id="formHeaderBlock">
             <div class="eyebrow" style="margin-bottom: 8px;">
               <span class="eyebrow-dot"></span> PING MY INBOX · SHOOT YOUR SHOT
@@ -1789,7 +1871,6 @@
             <p>Got an idea, a project, or just good vibes? Send it across—I don't bite!</p>
           </div>
 
-          <!-- THE FORM -->
           <form id="contactForm" action="https://formspree.io/f/xbggkjgq" method="POST" class="cyber-form">
             
             <div class="form-row">
@@ -1916,7 +1997,6 @@
     revealElements.forEach(el => el.classList.add('active'));
   }
 
-  // Backup reveal
   setTimeout(() => {
     revealElements.forEach(el => el.classList.add('active'));
   }, 400);
@@ -2054,7 +2134,7 @@
     animateCursor();
   }
 
-  // 4. INTERACTIVE CIRCUIT TELEMETRY CANVAS
+  // 4. AUTOMATIC AMBIENT TELEMETRY PARTICLES IN BACKGROUND
   const canvas = document.getElementById('circuitCanvas');
   const ctx = canvas.getContext('2d');
 
@@ -2065,31 +2145,30 @@
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
-  const nodes = Array.from({ length: 18 }, () => ({
-    x: Math.random() * (window.innerWidth * 0.5) + 10,
-    y: Math.random() * 500 + 40,
-    vx: (Math.random() - 0.5) * 0.35,
-    vy: (Math.random() - 0.5) * 0.35,
+  const nodes = Array.from({ length: 24 }, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * 600 + 40,
+    vx: (Math.random() - 0.5) * 0.4,
+    vy: (Math.random() - 0.5) * 0.4,
     radius: Math.random() * 2 + 1.2
   }));
 
   function renderCircuitTelemetry() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const maxBoundary = canvas.width * 0.52;
 
     nodes.forEach(n => {
       n.x += n.vx;
       n.y += n.vy;
 
-      if (n.x < 10 || n.x > maxBoundary) n.vx *= -1;
+      if (n.x < 10 || n.x > canvas.width - 10) n.vx *= -1;
       if (n.y < 20 || n.y > canvas.height - 20) n.vy *= -1;
     });
 
     for (let i = 0; i < nodes.length; i++) {
       for (let j = i + 1; j < nodes.length; j++) {
         const d = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
-        if (d < 120) {
-          ctx.strokeStyle = `rgba(0, 242, 254, ${(1 - d / 120) * 0.15})`;
+        if (d < 130) {
+          ctx.strokeStyle = `rgba(0, 242, 254, ${(1 - d / 130) * 0.16})`;
           ctx.lineWidth = 1;
           ctx.beginPath();
           ctx.moveTo(nodes[i].x, nodes[i].y);
@@ -2101,7 +2180,7 @@
 
     nodes.forEach((n, idx) => {
       const isRed = idx % 4 === 0;
-      ctx.fillStyle = isRed ? 'rgba(229, 35, 42, 0.6)' : 'rgba(0, 242, 254, 0.6)';
+      ctx.fillStyle = isRed ? 'rgba(229, 35, 42, 0.65)' : 'rgba(0, 242, 254, 0.65)';
       ctx.beginPath();
       ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
       ctx.fill();
@@ -2111,9 +2190,7 @@
   }
   renderCircuitTelemetry();
 
-  // ========================================================
   // 5. CONTACT FORM SUBMISSION WITH CYBER ANIMATION
-  // ========================================================
   const contactForm = document.getElementById('contactForm');
   const submitBtn = document.getElementById('submitBtn');
   const formStatus = document.getElementById('formStatus');
@@ -2138,7 +2215,6 @@
       });
 
       if (response.ok) {
-        // Trigger Cyber Hologram Animation
         contactForm.style.opacity = '0';
         contactForm.style.transform = 'scale(0.95)';
         
@@ -2146,8 +2222,6 @@
           contactForm.style.display = 'none';
           formHeaderBlock.style.display = 'none';
           formSuccessState.style.display = 'flex';
-
-          // Spawn Cyber Sparkle Burst
           spawnCyberSparkles(formWrapperCard);
         }, 300);
 
@@ -2162,7 +2236,6 @@
     }
   });
 
-  // Reset form handler
   function resetContactForm() {
     formSuccessState.style.display = 'none';
     formHeaderBlock.style.display = 'block';
@@ -2178,7 +2251,6 @@
     }, 50);
   }
 
-  // Futuristic Particle Burst Effect
   function spawnCyberSparkles(container) {
     const colors = ['#00F2FE', '#E5232A', '#FF8C00', '#ffffff'];
     const rect = container.getBoundingClientRect();
